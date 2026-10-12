@@ -1,63 +1,53 @@
-"""把实际接入素材与下载候选分开登记；不把可解码冒充已主观试听。"""
+"""更新当前音频、字体与手绘素材记录；已删除的旧图形只保留历史清单。"""
 import csv
-import hashlib
 import json
 import re
 from pathlib import Path
 
-# 工程根目录与逐文件资产清单路径。
+# 工程根目录与当前第三方音频、字体清单。
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "assets/manifest.csv"
-# used 收集游戏运行时脚本/资源/场景中明确引用的资产路径。
+# used 收集当前实际源码引用，手绘动态加载另从其独立清单读取。
 used = set()
-# folder 是会被游戏加载的源码和场景目录，不扫描测试或工具。
+# folder 为运行时源码与配置目录。
 for folder in ["core", "components", "scenes", "resources"]:
-    # path 是文本资源路径，二进制 .uid/.png 不参与此扫描。
+    # path 为可扫描的文本资源。
     for path in (ROOT / folder).rglob("*"):
         if path.suffix in [".gd", ".tscn", ".tres"]:
-            used.update(re.findall(r'res://(assets/[^"\s]+\.(?:png|ogg|otf))', path.read_text(encoding="utf-8")))
-# frame 为动态动作路径加载的蘑菇序列，不能仅靠字面路径扫描漏记。
-for frame in (ROOT / "assets/art/enemies/mushroom").rglob("*.png"):
-    used.add(frame.relative_to(ROOT).as_posix())
-# stream 为 csv 读取句柄，rows 保存全部历史来源行。
+            used.update(re.findall(r'res://(assets/[^"\s]+\.(?:png|ogg|otf))',
+                path.read_text(encoding="utf-8")))
+# stream 为当前清单，rows 保存音频与字体原始来源字段。
 with MANIFEST.open(encoding="utf-8-sig", newline="") as stream:
     reader = csv.DictReader(stream)
     fields = reader.fieldnames
     rows = list(reader)
-# row 是已有第三方资产，不改变来源和原始文件 SHA-256。
+# row 的状态仅由当前引用决定，不重新添加已删除的旧图片。
 for row in rows:
-    if row["project_path"] in used:
-        row["status"] = "integrated"
-        row["verification_note"] = "Integrated in v0.3 runtime; engine import/render/load checked. Audio subjective listening and seamless looping acceptance pending." if row["project_path"].endswith(".ogg") else "Integrated in v0.3 runtime; imported and rendered in Godot. Final art cohesion review pending."
-    elif row["status"] == "integrated" and not row["asset_id"].startswith("runtime_terrain_"):
-        row["status"] = "downloaded"
-        row["verification_note"] = "Retained source candidate; not referenced by current runtime."
-# existing 防止重复运行时重复追加生成贴图。
-existing = {row["project_path"] for row in rows}
-# index 为地形适配图片的固定类型。
-for index in range(3):
-    # path 为离线生成的地形适配 PNG。
-    path = ROOT / f"assets/art/environment/common/terrain_{index}.png"
-    # relative 是引擎内相对路径。
-    relative = path.relative_to(ROOT).as_posix()
-    if relative in existing or not path.exists():
-        continue
-    # source 是该适配图的明确原图，不把生成图错误归因于别的作者。
-    source = "assets/art/environment/common/tiles/stone_center.png" if index == 2 else f"assets/art/environment/grassland/nature/tiles/tile_{'02' if index == 0 else '05'}.png"
-    # original 找到已核验的源文件来源行，保留许可和署名。
-    original = next(row for row in rows if row["project_path"] == source)
-    # adapted 是新增资产行，来源继承但注明离线缩放。
-    adapted = dict(original)
-    adapted.update(asset_id=f"runtime_terrain_{index}", project_path=relative, purpose="64-unit TileMapLayer terrain", original_filename=Path(source).name, modifications="Offline Lanczos resize to 64x64; embedded into editable terrain.tscn", status="integrated", verification_note="Generated and imported; actual world rendered in Godot", source_path=source, sha256=hashlib.sha256(path.read_bytes()).hexdigest())
-    rows.append(adapted)
-# stream 为原清单写回句柄，字段与原版本一致。
+    integrated = row["project_path"] in used
+    row["status"] = "integrated" if integrated else "downloaded"
+    row["verification_note"] = (
+        "Referenced by v0.4 runtime; audio subjective review remains pending."
+        if integrated else "Retained audio/font candidate; not currently referenced.")
+# temporary 为原字段完整保存的临时文件，成功后原子替换。
 temporary = MANIFEST.with_suffix(".csv.tmp")
 with temporary.open("w", encoding="utf-8", newline="") as stream:
     writer = csv.DictWriter(stream, fieldnames=fields)
     writer.writeheader()
     writer.writerows(rows)
 temporary.replace(MANIFEST)
-# report 是本次接入与保留候选的数量，代码原生视觉另见 RUNTIME_ART.md。
-report = {"manifest_entries": len(rows), "integrated_entries": sum(row["status"] == "integrated" for row in rows), "runtime_drawings": "docs/art/RUNTIME_ART.md", "audio_subjective_review": "pending"}
-(ROOT / "docs/validation/runtime_asset_usage.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+# painted 为当前手绘动态资源，来源清单独立于第三方音频和字体。
+with (ROOT / "assets/art/painted_v1/manifest.csv").open(encoding="utf-8", newline="") as stream:
+    painted = list(csv.DictReader(stream))
+# report 说明当前来源清单数量；历史删除记录不混入当前资产数。
+report = {
+    "manifest_entries": len(rows),
+    "integrated_entries": sum(row["status"] == "integrated" for row in rows),
+    "painted_texture_entries": len(painted),
+    "painted_manifest": "assets/art/painted_v1/manifest.csv",
+    "removed_art_manifest": "docs/art/removed_legacy_assets.csv",
+    "runtime_drawings": "docs/art/RUNTIME_ART.md",
+    "audio_subjective_review": "pending",
+}
+(ROOT / "docs/validation/runtime_asset_usage.json").write_text(
+    json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 print(json.dumps(report, ensure_ascii=False))

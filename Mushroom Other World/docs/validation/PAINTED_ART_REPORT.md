@@ -17,6 +17,6 @@
 
 查看实际图片后，已修复菜单渐变条纹、独立草地块的圆角缝隙、地形材质过密和旧蓝色机关门与手绘场景不协调的问题。人物跑跳使用独立图，显示倍率和脚底画布固定。截图未经后期编辑。
 
-发行包：`builds/mushroom_other_world_windows_v0.4_painted.zip`，89,558,356 字节（约 85.4 MiB）。新 exe 与 pck 位于 `builds/windows_painted_v0.4/`，旧 v0.3 包保留。实际发行哈希和检查范围见 `release_painted_v0.4_validation.json`。
+发行包：`builds/mushroom_other_world_windows_v0.4_painted.zip`，87,960,357 字节（约 83.9 MiB，旧美术清理后重新打包）。新 exe 与 pck 位于 `builds/windows_painted_v0.4/`，旧 v0.3 包保留。实际发行哈希和检查范围见 `release_painted_v0.4_validation.json`。
 
 本轮没有宣称在新机器离线完整通关，也不把自动输入当作真人首次体验。动画连续性、个别八方向枪口姿势和镜像远景构图仍可精修；美术目标已从代码几何图形混搭切换到参考图统一的手绘资源。

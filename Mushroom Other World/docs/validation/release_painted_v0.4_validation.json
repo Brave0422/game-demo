@@ -22,12 +22,12 @@
       "sha256": "d34d36f3be1a6c49c56525ae86469b92e4f417ddf0b43cf00dd80c385c4b0562"
     },
     "builds/windows_painted_v0.4/mushroom_other_world.pck": {
-      "bytes": 54689788,
-      "sha256": "174c24a505ea3869d49929e754f39b70fa0c9bb0d6f8aed8c813175cba663d10"
+      "bytes": 52138404,
+      "sha256": "d6b75d23012c34b399e03fbe4aa6dc2d699655c1e3bc2ed5ec40e3866bd6d423"
     },
     "builds/mushroom_other_world_windows_v0.4_painted.zip": {
-      "bytes": 89558356,
-      "sha256": "db7186e7da5cc8f49fcd6d5cc1a4c5dc6b1fea43de7c0c558a79425f0252c311"
+      "bytes": 87960357,
+      "sha256": "a93f4cda3eec3fb75315c8f588d5e47ec2e0b4bc1c450c315c7c7a0041fa0628"
     }
   }
 }

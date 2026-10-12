@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c5u00ecc4detg"
+
+[deps]
+
+files=["res://assets/art/painted_v1/manifest.source.translation", "res://assets/art/painted_v1/manifest.date.translation", "res://assets/art/painted_v1/manifest.width.translation", "res://assets/art/painted_v1/manifest.height.translation", "res://assets/art/painted_v1/manifest.alpha.translation", "res://assets/art/painted_v1/manifest.sha256.translation"]
+
+source_file="res://assets/art/painted_v1/manifest.csv"
+dest_files=["res://assets/art/painted_v1/manifest.source.translation", "res://assets/art/painted_v1/manifest.date.translation", "res://assets/art/painted_v1/manifest.width.translation", "res://assets/art/painted_v1/manifest.height.translation", "res://assets/art/painted_v1/manifest.alpha.translation", "res://assets/art/painted_v1/manifest.sha256.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

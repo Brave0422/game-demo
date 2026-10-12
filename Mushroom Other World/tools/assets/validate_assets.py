@@ -1,4 +1,4 @@
-"""Validate asset bytes and create inspection sheets, without gameplay code."""
+"""Validate retained audio/fonts and current painted textures after legacy art cleanup."""
 import concurrent.futures
 import csv
 import hashlib
@@ -56,18 +56,15 @@ if __name__ == '__main__':
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
         results = list(pool.map(validate, ROWS))
     (REPORT / 'asset_validation.json').write_text(json.dumps(results, indent=2), encoding='utf-8')
-    sheet('grassland_contact_sheet', sorted((ROOT / 'assets/art/environment/grassland/nature').rglob('*.png')))
-    medieval = sorted((ROOT / 'assets/art/environment/dungeon').rglob('*.png'))
-    sheet('dungeon_contact_sheet', medieval[::6])
-    ui = sorted((ROOT / 'assets/art/ui/adventure').rglob('*.png'))
-    sheet('ui_contact_sheet', ui[::5])
-    enemy = sorted((ROOT / 'assets/art/enemies/mushroom').rglob('*.png'))
-    sheet('enemies_contact_sheet', enemy[::4] + sorted((ROOT / 'assets/art/enemies/bat').glob('*.png')), columns=5, size=190)
-    mushrooms = sorted((ROOT / 'assets/art/environment/grassland/mushrooms').glob('*.png'))
-    sheet('mushrooms_contact_sheet', mushrooms)
-    assert not list((ROOT / 'scenes').rglob('*.gd'))
-    assert not list((ROOT / 'core').rglob('*.gd'))
-    assert not list((ROOT / 'components').rglob('*.gd'))
+    # 当前手绘资源单独登记来源，不沿用第三方 CC0 的许可字段。
+    with (ROOT / 'assets/art/painted_v1/manifest.csv').open(encoding='utf-8', newline='') as stream:
+        painted = list(csv.DictReader(stream))
+    for row in painted:
+        path = ROOT / row['project_path']
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == row['sha256'], str(path)
+        with Image.open(path) as image:
+            assert image.size == (int(row['width']), int(row['height']))
+            image.verify()
     print(json.dumps({'assets': len(ROWS), 'formats': dict(Counter(Path(r['project_path']).suffix for r in ROWS)),
         'audio_checks': 'Full decode; NOT subjective listening or seamless-loop validation',
-        'project': 'No gameplay scripts created'}, indent=2))
+        'painted_textures': len(painted), 'project': 'Current assets verified'}, indent=2))
