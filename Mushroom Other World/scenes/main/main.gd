@@ -83,12 +83,14 @@ func _build_theme() -> void:
 	for state: String in ["normal", "hover", "pressed", "focus"]:
 		# style 为按钮底色、圆角与内边距。
 		var style: StyleBoxFlat = StyleBoxFlat.new()
-		style.bg_color = Color("f2d8a0") if state in ["hover", "focus"] else Color("e7c995")
+		style.bg_color = Color("f2d397") if state in ["hover", "focus"] else Color("bc8b51")
 		if state == "pressed":
 			style.bg_color = Color("c3a679")
-		style.border_color = Color("fff1c7")
-		style.set_border_width_all(3 if state == "focus" else 0)
-		style.set_corner_radius_all(12)
+		style.border_color = Color("ffe5a6") if state == "focus" else Color("785032")
+		style.set_border_width_all(3 if state == "focus" else 2)
+		style.set_corner_radius_all(7)
+		style.shadow_color = Color(0.07,0.04,0.02,0.35)
+		style.shadow_size = 5
 		style.content_margin_left = 22
 		style.content_margin_right = 22
 		style.content_margin_top = 10
@@ -147,6 +149,8 @@ func _label(
 	label.text = text
 	label.add_theme_font_size_override("font_size", font_size)
 	label.add_theme_color_override("font_color", color)
+	label.add_theme_color_override("font_outline_color",Color(0.04,0.07,0.06,0.75))
+	label.add_theme_constant_override("outline_size",2)
 	parent.add_child(label)
 	return label
 
@@ -185,7 +189,7 @@ func _show_main() -> void:
 	_button(column, "声音与显示", func() -> void: _show_settings(false))
 	_button(column, "操作 / 素材署名", _show_credits)
 	_button(column, "退出游戏", _request_quit)
-	_label(column, "单人 · 键盘     /     GODOT 4.7.2", 14, Color("aad0c4"))
+	_label(column, "单人 · 键盘     /     手绘美术版 v0.4", 14, Color("dfd7ba"))
 
 
 ## 角色选择页明确两套武器差异，选择后才开始新会话。
@@ -385,7 +389,7 @@ func _show_credits() -> void:
 			"环境 / UI / 音效：Kenney、GameArt2D（CC0）\n"
 			+ "蘑菇 / 蝙蝠：OpenGameArt 作者，详见 CREDITS.md\n"
 			+ "音乐：SpiderDave、nihilocrat、nene（CC0）\n字体：Noto Sans CJK（SIL OFL 1.1）\n"
-			+ "新增角色 / 怪物：本项目可编辑矢量绘制，经典形象为同人改编。\n"
+			+ "场景 / 角色 / 怪物 / 道具：以美术参考图生成的手绘资源，经典形象为同人改编。\n"
 			+ "完整来源及许可：assets/manifest.csv、assets/licenses/。"
 		),
 		18

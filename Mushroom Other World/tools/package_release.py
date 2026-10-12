@@ -10,7 +10,7 @@ import zipfile
 
 # 工程根目录及既有导出目录，不创建外部系统依赖。
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "builds/windows"
+OUTPUT = ROOT / "builds/windows_painted_v0.4"
 # 日志集中保存到版本化验证目录，不混入玩家发行包。
 REPORT = ROOT / "docs/validation"
 # 仅向项目内的隔离用户目录写设置，避免影响正式玩家记录。
@@ -40,7 +40,7 @@ for name, command in checks:
     results.append({"check": name, "exit_code": result.returncode, "errors_or_warnings": issues})
 
 # 玩家说明随 exe/pck 一同发放，不要求玩家安装编辑器或 Python。
-readme = """蘑菇异界：双雄闯关 — v0.3 开发试玩版
+readme = """蘑菇异界：双雄闯关 — v0.4 手绘美术试玩版
 
 完整解压后双击 mushroom_other_world.exe。
 mushroom_other_world.pck 必须放在 exe 同一目录。Windows x86_64，无需安装 Godot。
@@ -53,7 +53,9 @@ CP0—CP5 自动保存本次游戏检查点；退出游戏或返回菜单清除�
 设置和成绩保存到 Windows 用户应用数据目录中的 Godot/app_userdata/蘑菇异界：双雄闯关。
 
 包含两角色、九种武器配置、五类怪物、草地/地下城完整首关及两阶段 Boss。
-当前为开发试玩版；14—18 分钟首次体验时长、最终美术和音频试听尚未验收。
+以原参考图生成并接入 9 张美术源图、64 张透明切片、2 张背景和连续地表。
+角色、五怪、Boss、场景、道具、菜单和 HUD 已切换新美术。
+动画细节仍可精修；14—18 分钟首次体验时长和音频主观试听尚未验收。
 素材及许可见 CREDITS.md 和 licenses/。经典角色同人绘制不属于第三方 CC0 素材。
 """
 (OUTPUT / "README.txt").write_text(readme, encoding="utf-8-sig")
@@ -61,7 +63,7 @@ shutil.copy2(ROOT / "CREDITS.md", OUTPUT / "CREDITS.md")
 shutil.copytree(ROOT / "assets/licenses", OUTPUT / "licenses", dirs_exist_ok=True)
 
 # archive 是完整玩家压缩包，固定文件白名单排除日志和本地设置。
-archive = ROOT / "builds/mushroom_other_world_windows_v0.3.zip"
+archive = ROOT / "builds/mushroom_other_world_windows_v0.4_painted.zip"
 # files 只包含程序、资源、玩家说明和来源许可证。
 files = [OUTPUT / name for name in ["mushroom_other_world.exe", "mushroom_other_world.pck", "README.txt", "CREDITS.md"]]
 files += sorted(path for path in (OUTPUT / "licenses").rglob("*") if path.is_file())
@@ -77,6 +79,6 @@ for path in [OUTPUT / "mushroom_other_world.exe", OUTPUT / "mushroom_other_world
     checksums[path.relative_to(ROOT).as_posix()] = {"bytes": path.stat().st_size, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
 # report 保存本机独立包的实际验证范围，其他机器离线通关仍需人工执行。
 report = {"checks": results, "characters_started_from_pck": ["bill", "mega_man"],
-          "scope": "Exported EXE startup; editor engine separately loads exported PCK for two characters, 40 enemies, pause/resume/menu. Same Windows machine; not clean-machine full playthrough", "files": checksums}
-(REPORT / "release_validation.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+          "scope": "Exported EXE startup; engine separately loads exported PCK for 67 painted textures, two characters, 40 enemies, pause/resume/menu. Same Windows machine; not clean-machine full playthrough", "files": checksums}
+(REPORT / "release_painted_v0.4_validation.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 print(json.dumps(report, ensure_ascii=False, indent=2))

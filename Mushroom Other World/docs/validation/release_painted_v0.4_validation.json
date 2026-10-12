@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "check": "export_startup",
+      "exit_code": 0,
+      "errors_or_warnings": []
+    },
+    {
+      "check": "export_smoke",
+      "exit_code": 0,
+      "errors_or_warnings": []
+    }
+  ],
+  "characters_started_from_pck": [
+    "bill",
+    "mega_man"
+  ],
+  "scope": "Exported EXE startup; engine separately loads exported PCK for 67 painted textures, two characters, 40 enemies, pause/resume/menu. Same Windows machine; not clean-machine full playthrough",
+  "files": {
+    "builds/windows_painted_v0.4/mushroom_other_world.exe": {
+      "bytes": 109268480,
+      "sha256": "d34d36f3be1a6c49c56525ae86469b92e4f417ddf0b43cf00dd80c385c4b0562"
+    },
+    "builds/windows_painted_v0.4/mushroom_other_world.pck": {
+      "bytes": 54689788,
+      "sha256": "174c24a505ea3869d49929e754f39b70fa0c9bb0d6f8aed8c813175cba663d10"
+    },
+    "builds/mushroom_other_world_windows_v0.4_painted.zip": {
+      "bytes": 89558356,
+      "sha256": "db7186e7da5cc8f49fcd6d5cc1a4c5dc6b1fea43de7c0c558a79425f0252c311"
+    }
+  }
+}

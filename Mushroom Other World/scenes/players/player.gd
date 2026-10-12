@@ -30,7 +30,7 @@ var _knockback: float = 0.0
 @onready var body_shape: CollisionShape2D = $BodyShape
 ## 独立伤害碰撞体，与身体不承担同一碰撞职责。
 @onready var hurt_shape: CollisionShape2D = $Hurtbox/Shape
-## 分层卡通绘制节点，碰撞不随动画抖动。
+## 手绘动作显示节点，碰撞不随动画抖动。
 @onready var visual: Node2D = $PlayerVisual
 
 

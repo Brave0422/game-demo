@@ -26,12 +26,16 @@ func set_open(value: bool) -> void:
 	queue_redraw()
 
 
-## 门打开后只留拱柱底座，关闭时绘制可读竖向格栅。
+## 木质机关门与石制底座沿用手绘材质，关闭宽度对应真实实体。
 func _draw() -> void:
 	if opened:
-		draw_rect(Rect2(-22, -12, 44, 12), Color("759d99"))
+		PaintedArt.draw(self,"stone",Rect2(-22,-12,44,12))
 		return
-	draw_rect(Rect2(-20, -height, 40, height), Color("35485e"))
-	# bar_index 是机关门的横向装饰扣，间距固定。
-	for bar_index: int in range(int(height / 48)):
-		draw_rect(Rect2(-24, -height + bar_index * 48 + 12, 48, 12), Color("99c9ca"))
+	draw_rect(Rect2(-16,-height,32,height),Color("5a3d27"))
+	# segment 为木门竖向的固定材质段。
+	for segment: int in range(ceili(height/64)):
+		PaintedArt.draw(self,"crate",Rect2(-16,-height+segment*64,32,
+			minf(64,height-segment*64)))
+		draw_rect(Rect2(-20,-height+segment*64+12,40,7),Color("4a382a"))
+		draw_circle(Vector2(-12,-height+segment*64+15),2,Color("d1ac71"))
+		draw_circle(Vector2(12,-height+segment*64+15),2,Color("d1ac71"))

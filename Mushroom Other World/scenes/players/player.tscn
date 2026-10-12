@@ -44,5 +44,5 @@ script = ExtResource("3")
 editor_description = "实际发射锚点；视觉枪口以相同瞄准方向绘制。"
 position = Vector2(36, -66)
 [node name="PlayerVisual" type="Node2D" parent="."]
-editor_description = "独立分层矢量角色与动作，不修改物理碰撞。"
+editor_description = "参考图同风格的透明手绘动作播放器，固定脚底锚点，不修改物理碰撞。"
 script = ExtResource("4")

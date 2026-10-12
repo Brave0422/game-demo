@@ -271,23 +271,37 @@ func finish() -> void:
 	queue_free()
 
 
-## 绘制不同弹道形状，敌方孢子与玩家弹有明确轮廓差异。
+## 手绘冰晶、回旋刃与火焰；直射弹保留高可读光晕与短尾迹。
 func _draw() -> void:
-	if kind == "ring":
-		draw_arc(Vector2.ZERO, 64, age * 8, TAU + age * 8, 48, Color(1, 0.52, 0.18, 0.7), 12, true)
-	elif kind == "ice":
-		draw_colored_polygon(
-			PackedVector2Array([Vector2(-17, 0), Vector2(0, -24), Vector2(17, 0), Vector2(0, 24)]),
-			tint
-		)
-	elif kind == "cutter":
-		draw_arc(Vector2.ZERO, 19, age * 18, age * 18 + 4.8, 24, tint, 8, true)
-	elif kind == "laser":
-		draw_line(-direction * 25, direction * 25, tint, 6, true)
-		draw_line(-direction * 22, direction * 22, Color.WHITE, 2, true)
-	elif kind == "ground_wave":
-		draw_arc(Vector2(0, 24), 24, PI, TAU, 24, Color("eb82df"), 13, true)
+	if kind=="ring":
+		draw_arc(Vector2.ZERO,64,age*8,TAU+age*8,48,Color(1,0.52,0.18,0.55),9,true)
+		# index 为围绕真实火环判定绘制的四簇火焰。
+		for index: int in range(4):
+			draw_set_transform(Vector2.from_angle(age*8+index*PI/2)*64,
+				age*8+index*PI/2+PI/2)
+			PaintedArt.draw(self,"fire",Rect2(-17,-12,34,24))
+		draw_set_transform(Vector2.ZERO)
+	elif kind=="ice":
+		draw_set_transform(Vector2.ZERO,direction.angle())
+		PaintedArt.draw(self,"ice",Rect2(-24,-17,48,34))
+		draw_set_transform(Vector2.ZERO)
+	elif kind=="cutter":
+		draw_set_transform(Vector2.ZERO,age*18)
+		PaintedArt.draw(self,"cutter",Rect2(-21,-21,42,42))
+		draw_set_transform(Vector2.ZERO)
+	elif weapon_id=="contra_f" or kind=="fire":
+		draw_set_transform(Vector2.ZERO,direction.angle())
+		PaintedArt.draw(self,"fire",Rect2(-19,-13,38,26))
+		draw_set_transform(Vector2.ZERO)
+	elif kind=="laser":
+		draw_line(-direction*25,direction*25,tint,8,true)
+		draw_line(-direction*22,direction*22,Color.WHITE,2,true)
+	elif kind=="ground_wave":
+		draw_arc(Vector2(0,24),24,PI,TAU,24,Color("eb82df"),13,true)
 	else:
-		draw_circle(Vector2.ZERO, (12 if hostile else 7) + charge_level * 7, Color("334453"))
-		draw_circle(Vector2.ZERO, (9 if hostile else 5) + charge_level * 7, tint)
-		draw_circle(Vector2(-2, -3), 3 + charge_level * 3, Color("fff8d5"))
+		# radius 对应现有扫掠判定的主要视觉半径。
+		var radius: float = (12 if hostile else 7)+charge_level*7
+		draw_line(-direction*radius*2,Vector2.ZERO,Color(tint,0.55),radius,true)
+		draw_circle(Vector2.ZERO,radius+5,Color(tint,0.13))
+		draw_circle(Vector2.ZERO,radius,tint)
+		draw_circle(Vector2(-2,-3),radius*0.55,Color("fff8df"))

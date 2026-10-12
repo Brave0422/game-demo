@@ -30,49 +30,16 @@ var _cooldown: float = 0.0
 var _animation_time: float = 0.0
 ## 受击闪白剩余秒数。
 var _flash: float = 0.0
-## 蘑菇已有序列动画资源缓存。
-var _mushroom_frames: Dictionary = {}
-## 已有蝙蝠两帧纹理。
-var _bat_frames: Array[Texture2D] = []
 ## 身体碰撞节点，怪物只与世界碰撞。
 @onready var body_shape: CollisionShape2D = $BodyShape
 
 
-## 初始化独立生命与图片；只有蝙蝠不使用重力。
+## 初始化独立生命与实体；五怪统一使用手绘图集，只有蝙蝠不使用重力。
 func _ready() -> void:
 	add_to_group("enemies")
 	hp = data.max_hp
 	home = global_position
-	if data.id == "patrol":
-		# animation 对应已有蘑菇资源的动作目录。
-		for animation: String in ["idle", "walk", "attack", "hurt", "dead"]:
-			# folder 是固定动作目录名。
-			var folder: String = {
-				"idle": "01_idle",
-				"walk": "02_walk",
-				"attack": "03_attack",
-				"hurt": "04_hurt",
-				"dead": "05_dead"
-			}[animation]
-			# frames 保存当前动作全部可导入纹理。
-			var frames: Array[Texture2D] = []
-			# frame_index 按连续命名读取，不依赖目录遍历顺序。
-			for frame_index: int in range(16):
-				# path 是现有动画帧的精确路径。
-				var path: String = (
-					"res://assets/art/enemies/mushroom/%s/mushroom_%s_%03d.png"
-					% [folder, animation, frame_index]
-				)
-				if ResourceLoader.exists(path):
-					frames.append(load(path))
-			_mushroom_frames[animation] = frames
 	if data.id == "bat":
-		_bat_frames.assign(
-			[
-				load("res://assets/art/enemies/bat/bat_1.png"),
-				load("res://assets/art/enemies/bat/bat_2.png")
-			]
-		)
 		body_shape.disabled = true
 
 
@@ -242,85 +209,28 @@ func _die() -> void:
 	queue_redraw()
 
 
-## 绘制轮廓、明确预警形状、冻结和血量；基础素材来自已下载资源。
+## 使用同一手绘图集表现五怪动作；预警、护甲开合和冻结由真实状态控制。
 func _draw() -> void:
 	if not data:
 		return
-	# color 为各机制标识色，形状也各自不同。
-	var color: Color = Color("9fcb64")
-	if data.id == "patrol" and not _mushroom_frames.is_empty():
-		# animation 为当前状态对应动作，移动与待机分离。
-		var animation: String = (
-			"dead"
-			if state == "dead"
-			else (
-				"hurt"
-				if _flash > 0
-				else (
-					"attack" if state == "attack" else ("walk" if absf(velocity.x) > 0 else "idle")
-				)
-			)
-		)
-		# frames 为已加载动作帧。
-		var frames: Array = _mushroom_frames[animation]
-		if not frames.is_empty():
-			draw_set_transform(Vector2.ZERO, 0, Vector2(-facing, 1))
-			draw_texture_rect_region(
-				frames[int(_animation_time * 10) % frames.size()],
-				Rect2(-48, -84, 96, 84),
-				Rect2(28, 65, 252, 207)
-			)
-			draw_set_transform(Vector2.ZERO)
-	elif data.id == "bat" and not _bat_frames.is_empty():
-		draw_texture_rect(
-			_bat_frames[int(_animation_time * 8) % 2],
-			Rect2(-62, -70, 124, 80),
-			false,
-			Color("c29beb")
-		)
-	elif data.id == "roller":
-		# spike_index 绘制十二根真实尖刺，冻结时由冰壳覆盖。
-		for spike_index: int in range(12):
-			# angle 是滚动旋转后的当前尖刺角度。
-			var angle: float = spike_index * TAU / 12 + _animation_time * facing * 2
-			draw_colored_polygon(
-				PackedVector2Array(
-					[
-						Vector2(0, -36) + Vector2.from_angle(angle - 0.17) * 29,
-						Vector2(0, -36) + Vector2.from_angle(angle) * 45,
-						Vector2(0, -36) + Vector2.from_angle(angle + 0.17) * 29
-					]
-				),
-				Color("34484a")
-			)
-		draw_circle(Vector2(0, -36), 32, Color("ba784b"))
-		draw_arc(
-			Vector2(0, -36), 22, _animation_time, 5 + _animation_time, 24, Color("f6c174"), 5, true
-		)
-	elif data.id == "beetle":
-		draw_style_box(_style(Color("a898c8")), Rect2(-43, -48, 86, 43))
-		draw_circle(Vector2(-facing * 25, -26), 16, Color("ffc387"))
-		# shield_offset 打开护甲时将盾片抬起，不能只换颜色。
-		var shield_offset: Vector2 = Vector2(
-			facing * 27, -44 if state == "recovery" or state == "frozen" else -24
-		)
-		draw_style_box(
-			_style(Color("628e99")), Rect2(shield_offset - Vector2(17, 32), Vector2(34, 64))
-		)
-		draw_line(
-			shield_offset + Vector2(0, -21),
-			shield_offset + Vector2(0, 18),
-			Color("d4eee4"),
-			4,
-			true
-		)
-	else:
-		draw_style_box(_style(Color("eed497")), Rect2(-23, -50, 46, 48))
-		draw_circle(Vector2(0, -62), 40, Color("364b44"))
-		draw_circle(Vector2(0, -64), 35, color)
-		draw_circle(Vector2(-16, -77), 9, Color("f8e9b9"))
-		draw_style_box(_style(Color("d8954b")), Rect2(facing * 22 - 17, -56, 34, 27))
-		draw_circle(Vector2(facing * 37, -42), 10, Color("3b3b47"))
+	# frame 为当前待机、攻击或受伤动作。
+	var frame: int = 2 if _flash>0 or state=="dead" else 0
+	if state in ["telegraph","attack"] or (data.id=="beetle" and state=="recovery"):
+		frame = 1
+	if data.id=="bat" and state=="idle":
+		frame = int(_animation_time*6)%2
+	# image 为当前敌人的独立透明切片。
+	var image: Texture2D = PaintedArt.texture("%s_%d" % [data.id,frame])
+	# ratio 按待机尺寸固定，各动作不会被重新压成同一矩形。
+	var ratio: float = {"patrol":0.39,"spitter":0.34,"bat":0.30,
+		"roller":0.31,"beetle":0.34}[data.id]
+	# size 为保持源比例的世界显示尺寸。
+	var size: Vector2 = image.get_size()*ratio
+	# hop 为移动时微小步态，实体锚点和攻击范围保持固定。
+	var hop: float = absf(sin(_animation_time*9))*2.0 if absf(velocity.x)>0 else 0.0
+	draw_set_transform(Vector2(0,-hop),0,Vector2(-facing,1))
+	draw_texture_rect(image,Rect2(-size.x*0.5,-size.y,size.x,size.y),false)
+	draw_set_transform(Vector2.ZERO)
 	if state == "telegraph":
 		draw_colored_polygon(
 			PackedVector2Array([Vector2(-12, -126), Vector2(12, -126), Vector2(0, -105)]),

@@ -64,34 +64,18 @@ func capture() -> Dictionary:
 	return {"id": stable_id, "kind": kind, "position": global_position, "safe": safe_position}
 
 
-## 图标使用颜色与符号双重区分，武器显示当前角色映射后的字母/名称缩写。
+## 手绘武器、生命与能量图标，符号与形状同时区分用途。
 func _draw() -> void:
-	# bob 是仅视觉浮动，不改变拾取碰撞位置。
-	var bob: Vector2 = Vector2(0, sin(_time * 3) * 4)
-	# weapon 表示武器掉落而非回复。
-	var weapon: bool = kind in ["A", "B", "C", "D"]
-	# tint 为道具分类色。
-	var tint: Color = (
-		Color("ffdd83") if weapon else (Color("85daf4") if kind == "energy" else Color("ed8c89"))
-	)
-	draw_circle(bob, 25, Color("324e53"))
-	draw_circle(bob, 21, tint)
-	# caption 默认为回复符号，武器按角色映射显示。
-	var caption: String = "+" if not weapon else kind
-	if kind == "energy":
-		caption = "E"
-	if weapon and is_instance_valid(player):
-		caption = (
-			{"A": "S", "B": "L", "C": "F", "D": "M"}[kind]
-			if player.data.id == "bill"
-			else {"A": "刃", "B": "冰", "C": "火", "D": "刃"}[kind]
-		)
-	draw_string(
-		preload("res://assets/fonts/noto_sans_sc_bold.otf"),
-		bob + Vector2(-12, 10),
-		caption,
-		HORIZONTAL_ALIGNMENT_LEFT,
-		-1,
-		25,
-		Color("31434e")
-	)
+	# bob 只让图标漂浮，不移动拾取判定。
+	var bob: Vector2 = Vector2(0,sin(_time*3)*4)
+	# icon 为当前角色对应的物品形象。
+	var icon: String = "heart"
+	if kind=="energy":
+		icon = "ammo"
+	elif kind in ["A","B","C","D"]:
+		if is_instance_valid(player) and player.data.id=="mega_man":
+			icon = {"A":"cutter","B":"ice","C":"fire","D":"cutter"}[kind]
+		else:
+			icon = {"A":"capsule_s","B":"capsule_l","C":"capsule_f","D":"ammo"}[kind]
+	draw_circle(bob,27,Color(1,0.88,0.45,0.10))
+	PaintedArt.draw(self,icon,Rect2(bob-Vector2(22,22),Vector2(44,44)))

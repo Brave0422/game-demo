@@ -14,10 +14,6 @@ signal broken(stable_id: String, drop: String, position: Vector2)
 var hp: int = 3
 ## 原子破坏标记，延迟删除前阻止重复发奖。
 var is_broken: bool = false
-## 已下载木箱贴图。
-var _crate_texture: Texture2D = preload(
-	"res://assets/art/environment/grassland/nature/object/crate.png"
-)
 
 
 ## 按交互种类初始化耐久。
@@ -57,31 +53,10 @@ func _break() -> void:
 	queue_free()
 
 
-## 箱上文字表示可获得内容，砖和裂纹有不同纹理。
+## 砖、箱、裂纹石使用统一手绘纹理，内容以小徽记提示。
 func _draw() -> void:
-	if kind == "crate":
-		draw_texture_rect(_crate_texture, Rect2(-32, -32, 64, 64), false)
-		draw_string(
-			ThemeDB.fallback_font,
-			Vector2(-9, 9),
-			drop,
-			HORIZONTAL_ALIGNMENT_LEFT,
-			-1,
-			25,
-			Color("fff4c3")
-		)
-	else:
-		draw_rect(Rect2(-32, -32, 64, 64), Color("a07c68") if kind == "brick" else Color("a9bdc0"))
-		draw_rect(Rect2(-32, -32, 64, 64), Color("43585d"), false, 4)
-		if kind == "brick":
-			draw_line(Vector2(-30, 0), Vector2(30, 0), Color("675253"), 4)
-			draw_line(Vector2(0, -30), Vector2(0, 0), Color("675253"), 4)
-		else:
-			draw_polyline(
-				PackedVector2Array(
-					[Vector2(8, -30), Vector2(-8, -10), Vector2(6, 0), Vector2(-12, 28)]
-				),
-				Color("43585d"),
-				5,
-				true
-			)
+	PaintedArt.draw(self,kind,Rect2(-32,-32,64,64))
+	if kind=="crate" and not drop.is_empty():
+		draw_circle(Vector2(0,0),13,Color(0.15,0.09,0.04,0.82))
+		draw_string(preload("res://assets/fonts/noto_sans_sc_bold.otf"),Vector2(-7,7),
+			drop,HORIZONTAL_ALIGNMENT_LEFT,-1,19,Color("ffe3a1"))

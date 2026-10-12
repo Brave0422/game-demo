@@ -1,0 +1,14 @@
+{
+  "validated_targets": 1875,
+  "removed_bytes": 67297237,
+  "removed_files": 5512,
+  "retained": [
+    "assets/art/painted_v1",
+    "docs/art/art-direction-v1.png",
+    "assets/audio",
+    "assets/fonts",
+    "assets/licenses",
+    "builds"
+  ],
+  "date": "2026-10-12"
+}

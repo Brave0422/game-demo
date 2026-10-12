@@ -29,7 +29,7 @@ checks = {
     'full': ('full_run', ['--fixed-fps', '60', 'tests/full_run_test.tscn'], True),
     'visual': ('visual_check', ['tests/visual_check.tscn'], False),
     'terrain': ('terrain_build', ['--script', 'tools/build_terrain.gd'], True),
-    'export': ('windows_export', ['--editor', '--export-release', 'Windows Desktop', 'builds/windows/mushroom_other_world.exe'], True),
+    'export': ('windows_export', ['--editor', '--export-release', 'Windows Desktop', 'builds/windows_painted_v0.4/mushroom_other_world.exe'], True),
 }
 # selected 为本次明确要求执行的最小检查集合。
 selected = [args.only] if args.only else ['import', 'tests', 'physics', 'startup']

@@ -7,6 +7,7 @@ func _initialize() -> void:
 	# root 为生成场景根节点，每个子节点 owner 都指向此根以便打包。
 	var terrain_root: Node2D = Node2D.new()
 	terrain_root.name = "Terrain"
+	terrain_root.set_script(preload("res://scenes/levels/terrain_art.gd"))
 	terrain_root.editor_description = "固定首关地形；草地/地下双 TileMapLayer 可直接绘制。"
 	# tile_set 包含草地顶面、土层和地下石材三种 atlas。
 	var tile_set: TileSet = TileSet.new()
@@ -15,23 +16,21 @@ func _initialize() -> void:
 	tile_set.set_physics_layer_collision_layer(0, 1)
 	# source_index 与下方固定纹理顺序一一对应。
 	for source_index: int in range(3):
-		# source 使用已有 128px 纹理，运行时映射为 64px 逻辑格。
+		# source 使用当前手绘纹理，碰撞格仍保持 64 世界单位。
 		var source: TileSetAtlasSource = TileSetAtlasSource.new()
-		# texture_path 指向既有素材，地下使用同一基础加蓝灰调制。
+		# texture_path 只依赖当前手绘资源，清理旧素材后仍可生成地形。
 		var texture_path: String = (
-			"res://assets/art/environment/grassland/nature/tiles/tile_02.png"
+			"res://assets/art/painted_v1/grass_top.png"
 			if source_index == 0
-			else "res://assets/art/environment/grassland/nature/tiles/tile_05.png"
+			else "res://assets/art/painted_v1/earth.png"
 		)
-		# image 将地形离线缩放到逻辑格，原始高清素材仍保留。
+		# image 将编辑器预览缩放到逻辑格；运行画面仍由手绘地形画笔绘制。
 		if source_index == 2:
-			texture_path = "res://assets/art/environment/common/tiles/stone_center.png"
+			texture_path = "res://assets/art/painted_v1/stone.png"
 		# 从已导入纹理获取源图像，供离线适配尺寸。
 		var image: Image = (load(texture_path) as Texture2D).get_image()
 		image.resize(64, 64, Image.INTERPOLATE_LANCZOS)
-		# tile_path 为可导入的运行时适配纹理。
-		var tile_path: String = "res://assets/art/environment/common/terrain_%d.png" % source_index
-		image.save_png(tile_path)
+		# 预览图直接内嵌于 TileSet，不再生成重复的旧素材适配文件。
 		source.texture = ImageTexture.create_from_image(image)
 		source.texture_region_size = Vector2i(64, 64)
 		source.create_tile(Vector2i.ZERO)

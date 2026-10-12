@@ -30,23 +30,12 @@ func _on_body_entered(body: Node2D) -> void:
 		reached.emit(index, global_position)
 
 
-## 绘制旗帜、蘑菇灯和 CP 编号；激活后颜色与形状变化。
+## 手绘检查点旗帜；点亮时保留独立光环与编号。
 func _draw() -> void:
-	draw_line(Vector2(0, 0), Vector2(0, -146), Color("45666b"), 7, true)
-	draw_colored_polygon(
-		PackedVector2Array([Vector2(3, -140), Vector2(65, -124), Vector2(3, -106)]),
-		Color("86dfb4") if active else Color("f9d483")
-	)
-	draw_circle(Vector2(0, -150), 12, Color("b3f9df") if active else Color("fff0ba"))
-	draw_arc(
-		Vector2(0, -60), 50 + sin(_time * 2) * 4, PI, TAU, 32, Color(0.7, 1, 0.8, 0.25), 5, true
-	)
-	draw_string(
-		ThemeDB.fallback_font,
-		Vector2(13, -117),
-		"CP%d" % index,
-		HORIZONTAL_ALIGNMENT_LEFT,
-		-1,
-		17,
-		Color("25464a")
-	)
+	PaintedArt.decoration(self,"flag",Vector2(18,0),142,
+		Color.WHITE if active else Color("b8aea0"))
+	if active:
+		draw_arc(Vector2(0,-65),49+sin(_time*2)*3,PI,TAU,32,
+			Color(0.92,1,0.69,0.40),3,true)
+	draw_string(preload("res://assets/fonts/noto_sans_sc_bold.otf"),
+		Vector2(-19,-152),"CP%d" % index,HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("fff0b7"))

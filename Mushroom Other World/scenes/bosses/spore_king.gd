@@ -203,63 +203,29 @@ func _enter(next_state: String, duration: float) -> void:
 	queue_redraw()
 
 
-## 分层绘制菌盖、四肢与腹部核心；预警直接标明实际落点。
+## 手绘 Boss 四态与真实预警；核心暴露时亮环，非暴露时降低核心亮度。
 func _draw() -> void:
-	# cap 为阶段对应菌盖色。
-	var cap: Color = Color("d97169") if phase == 1 else Color("ed9050")
-	# tilt 为待机呼吸，死亡时单独倾倒。
-	var tilt: float = sin(_time * 2) * 0.025
-	if state == "defeated":
-		tilt = 0.7
-	if state in ["telegraph", "attack", "impact"] and move_kind == "slam":
-		draw_set_transform(Vector2.ZERO)
-		draw_rect(
-			Rect2(locked_x - global_position.x - 96, 571 - global_position.y, 192, 5),
-			Color("ffb18c")
-		)
-		draw_line(
-			Vector2(locked_x - global_position.x, 541 - global_position.y),
-			Vector2(locked_x - global_position.x, 571 - global_position.y),
-			Color("ffe4a5"),
-			4,
-			true
-		)
-	draw_set_transform(Vector2.ZERO, tilt)
-	draw_circle(Vector2(-73, -24), 39, Color("3b4b53"))
-	draw_circle(Vector2(73, -24), 39, Color("3b4b53"))
-	draw_circle(Vector2(-73, -30), 32, Color("e4c5a0"))
-	draw_circle(Vector2(73, -30), 32, Color("e4c5a0"))
-	draw_style_box(_style(Color("edcf9f")), Rect2(-105, -197, 210, 179))
-	draw_circle(Vector2(-118, -109), 29, Color("e1b986"))
-	draw_circle(Vector2(118, -109), 29, Color("e1b986"))
-	draw_circle(Vector2(0, -70), 43, Color("405a64"))
-	draw_circle(Vector2(0, -70), 32, Color("c1ffee") if state == "exposed" else Color("758778"))
-	if state == "exposed":
-		draw_arc(Vector2(0, -70), 49, 0, TAU, 40, Color("c9ffd5"), 5, true)
-	else:
-		draw_line(Vector2(-29, -96), Vector2(27, -47), Color("b2bf95"), 11, true)
-	draw_style_box(_style(cap), Rect2(-159, -287, 318, 115))
-	draw_circle(Vector2(-83, -249), 21, Color("ffe6bc"))
-	draw_circle(Vector2(32, -257), 28, Color("ffe6bc"))
-	draw_circle(Vector2(109, -216), 16, Color("ffe6bc"))
-	draw_circle(Vector2(-39, -161), 9, Color("3b4553"))
-	draw_circle(Vector2(39, -161), 9, Color("3b4553"))
-	draw_arc(Vector2(0, -143), 19, 0.0, PI, 20, Color("704f4b"), 5, true)
-	if state == "telegraph" or state == "combo_warning":
-		draw_circle(Vector2(0, -143), 20 + sin(_time * 20) * 3, Color("fff1b0"))
-		draw_colored_polygon(
-			PackedVector2Array([Vector2(-18, -332), Vector2(18, -332), Vector2(0, -301)]),
-			Color("ffe8ad")
-		)
-	draw_set_transform(Vector2.ZERO)
-
-
-## color 为填色，返回卡通深色描边画笔。
-func _style(color: Color) -> StyleBoxFlat:
-	# style 的大圆角构成菌盖和腹部轮廓。
-	var style: StyleBoxFlat = StyleBoxFlat.new()
-	style.bg_color = color
-	style.border_color = Color("3c4b53")
-	style.set_border_width_all(6)
-	style.set_corner_radius_all(62)
-	return style
+	if state in ["telegraph","attack","impact"] and move_kind=="slam":
+		draw_rect(Rect2(locked_x-global_position.x-96,571-global_position.y,192,5),
+			Color("ffb18c"))
+		draw_line(Vector2(locked_x-global_position.x,541-global_position.y),
+			Vector2(locked_x-global_position.x,571-global_position.y),Color("ffe4a5"),4,true)
+	# frame 为待机、举拳、喷吐与倒下四态。
+	var frame: int = 0
+	if state=="defeated":
+		frame = 3
+	elif state in ["telegraph","attack"] and move_kind=="slam":
+		frame = 1
+	elif state=="combo_warning" or (state=="telegraph" and move_kind!="slam"):
+		frame = 2
+	# tint 为第二阶段轻微暖色调制，纹理和剪影不变。
+	var tint: Color = Color("ffe1c6") if phase==2 else Color.WHITE
+	PaintedArt.draw(self,"boss_%d" % frame,Rect2(-216,-338.4,432,360),tint)
+	if state=="exposed":
+		draw_arc(Vector2(-18,-85),47,0,TAU,40,Color("fff7a3"),4,true)
+		draw_circle(Vector2(-18,-85),54,Color(1,0.8,0.22,0.12))
+	elif state!="defeated":
+		draw_circle(Vector2(-18,-85),38,Color(0.14,0.08,0.05,0.48))
+	if state=="telegraph" or state=="combo_warning":
+		draw_colored_polygon(PackedVector2Array(
+			[Vector2(-15,-365),Vector2(15,-365),Vector2(0,-341)]),Color("ffe8ad"))

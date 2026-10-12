@@ -44,8 +44,7 @@ func _physics_process(delta: float) -> void:
 		_wait = 0.3
 
 
-## 清晰站立面与方向轨道，轨道不参与碰撞。
+## 手绘木平台顶面与原碰撞顶面相同，方向灯提示往返运动。
 func _draw() -> void:
-	draw_rect(Rect2(-88, 0, 176, 22), Color("385868"))
-	draw_rect(Rect2(-88, 0, 176, 7), Color("a0d9c3"))
-	draw_line(Vector2(-60, 15), Vector2(60, 15), Color("edc988"), 4, true)
+	PaintedArt.draw(self,"platform",Rect2(-88,0,176,33))
+	draw_line(Vector2(-35,13),Vector2(35,13),Color("d9edc1"),2,true)
