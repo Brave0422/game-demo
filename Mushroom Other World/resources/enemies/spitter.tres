@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/enemies/enemy_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "spitter"
+display_name = "喷吐蘑菇"
+max_hp = 5
+movement_speed = 0.0
+detection_range = 540.0
+telegraph_time = 0.55
+attack_time = 0.1
+recovery_time = 1.75
+contact_damage = 0

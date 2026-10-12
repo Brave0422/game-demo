@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://scenes/bosses/spore_king.gd" id="1"]
+[sub_resource type="RectangleShape2D" id="core"]
+size = Vector2(194, 124)
+
+[node name="SporeKing" type="Node2D"]
+editor_description = "独立功能场景；行为与依赖见同目录脚本的中文注释。"
+script = ExtResource("1")
+z_index = 4
+[node name="Hurtbox" type="Area2D" parent="."]
+editor_description = "腹部核心；状态机统一判定菌甲关闭和核心暴露。"
+position = Vector2(0, -70)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+[node name="Shape" type="CollisionShape2D" parent="Hurtbox"]
+editor_description = "低位核心允许两角色平地基础弹命中。"
+position = Vector2(0, 0)
+shape = SubResource("core")

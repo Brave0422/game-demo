@@ -1,0 +1,34 @@
+[
+	{
+		"boss_hp": 0,
+		"character": "bill",
+		"checkpoint": 5,
+		"content_seconds": 191.5,
+		"deaths": 0,
+		"encounters_completed": [
+			"e1",
+			"e2"
+		],
+		"hp": 8,
+		"position": "(42849.3, 575.9252)",
+		"scope": "自动输入完整关卡，非首次真人试玩时长样本",
+		"total_seconds": 200.3,
+		"won": true
+	},
+	{
+		"boss_hp": 0,
+		"character": "mega_man",
+		"checkpoint": 5,
+		"content_seconds": 249.78,
+		"deaths": 1,
+		"encounters_completed": [
+			"e1",
+			"e2"
+		],
+		"hp": 8,
+		"position": "(42928.88, 575.9252)",
+		"scope": "自动输入完整关卡，非首次真人试玩时长样本",
+		"total_seconds": 287.77,
+		"won": true
+	}
+]

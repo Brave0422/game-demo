@@ -1,0 +1,18 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://scenes/props/attack_switch.gd" id="1"]
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(56, 56)
+
+[node name="AttackSwitch" type="Node2D"]
+editor_description = "独立功能场景；行为与依赖见同目录脚本的中文注释。"
+script = ExtResource("1")
+z_index = 3
+[node name="Hurtbox" type="Area2D" parent="."]
+editor_description = "只接受玩家攻击，零伤害冰刃同样触发。"
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+[node name="Shape" type="CollisionShape2D" parent="Hurtbox"]
+editor_description = "可攻击按钮体积。"
+position = Vector2(0, 0)
+shape = SubResource("body")

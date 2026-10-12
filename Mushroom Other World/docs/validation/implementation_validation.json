@@ -1,0 +1,42 @@
+[
+  {
+    "check": "full_run",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "implementation_import",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "gameplay_tests",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "physics_tests",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "implementation_startup",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "visual_check",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "boss_combat",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "windows_export",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  }
+]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://tests/visual_check.gd" id="1"]
+[node name="VisualCheck" type="Node"]
+editor_description = "仅开发验证：运行真实菜单与关卡并保存 Viewport 截图。"
+process_mode = 3
+script = ExtResource("1")

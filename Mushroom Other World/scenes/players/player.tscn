@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3]
+[ext_resource type="Script" path="res://scenes/players/player.gd" id="1"]
+[ext_resource type="Script" path="res://components/health.gd" id="2"]
+[ext_resource type="Script" path="res://scenes/players/weapon_controller.gd" id="3"]
+[ext_resource type="Script" path="res://scenes/players/player_visual.gd" id="4"]
+[ext_resource type="Resource" path="res://resources/characters/bill.tres" id="5"]
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(42, 88)
+
+[sub_resource type="RectangleShape2D" id="hurt"]
+size = Vector2(42, 88)
+
+[node name="Player" type="CharacterBody2D"]
+editor_description = "脚底锚点角色；仅与世界实体碰撞，不与怪物互相推挤。"
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 8.0
+platform_on_leave = 2
+z_index = 5
+script = ExtResource("1")
+data = ExtResource("5")
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+editor_description = "移动实体；站立/趴下时保持脚底不变。"
+position = Vector2(0, -44)
+shape = SubResource("body")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+editor_description = "独立玩家受击区，敌方攻击只查询本层。"
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+[node name="Shape" type="CollisionShape2D" parent="Hurtbox"]
+editor_description = "跟随当前姿态的伤害体积。"
+position = Vector2(0, -44)
+shape = SubResource("hurt")
+
+[node name="Health" type="Node" parent="."]
+editor_description = "聚合同帧伤害、无敌、生命与死亡信号。"
+script = ExtResource("2")
+[node name="WeaponController" type="Node" parent="."]
+editor_description = "发射事务、库存、能量与弹体上限。"
+script = ExtResource("3")
+[node name="Muzzle" type="Marker2D" parent="."]
+editor_description = "实际发射锚点；视觉枪口以相同瞄准方向绘制。"
+position = Vector2(36, -66)
+[node name="PlayerVisual" type="Node2D" parent="."]
+editor_description = "独立分层矢量角色与动作，不修改物理碰撞。"
+script = ExtResource("4")

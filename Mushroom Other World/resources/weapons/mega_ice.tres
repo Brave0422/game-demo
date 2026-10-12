@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/weapons/weapon_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "mega_ice"
+display_name = "冰冻波"
+kind = "ice"
+damage = 0
+cooldown = 0.45
+speed = 650.0
+energy_cost = 2
+pierce_count = 1
+max_active = 0
+target_damage_cap = 0
+tint = Color(0.56, 0.9, 1, 1)

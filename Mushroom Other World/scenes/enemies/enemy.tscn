@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1"]
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(54, 60)
+[sub_resource type="RectangleShape2D" id="hurt"]
+size = Vector2(80, 76)
+
+[node name="Enemy" type="CharacterBody2D"]
+editor_description = "独立功能场景；行为与依赖见同目录脚本的中文注释。"
+script = ExtResource("1")
+collision_layer = 0
+collision_mask = 1
+floor_snap_length = 8.0
+z_index = 4
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+editor_description = "怪物移动体，只与世界实体碰撞。"
+position = Vector2(0, -30)
+shape = SubResource("body")
+[node name="Hurtbox" type="Area2D" parent="."]
+editor_description = "敌方受击区，交给实体解析护甲/冻结。"
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+[node name="Shape" type="CollisionShape2D" parent="Hurtbox"]
+editor_description = "非实体受击形状。"
+position = Vector2(0, -38)
+shape = SubResource("hurt")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1"]
+[node name="Main" type="Node"]
+editor_description = "应用入口：菜单、暂停、关卡生命周期。"
+script = ExtResource("1")
+[node name="Interface" type="CanvasLayer" parent="."]
+editor_description = "屏幕空间 UI；主菜单和 HUD 不受世界镜头移动影响。"
+layer = 10
+[node name="Root" type="Control" parent="Interface"]
+editor_description = "容器式中文 UI 根节点，暂停期间继续处理。"
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

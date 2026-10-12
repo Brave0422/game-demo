@@ -1,0 +1,19 @@
+# Godot 4 generated editor/import caches. Keep *.uid and *.import sidecars.
+.godot/
+*.tmp
+*.log
+export_credentials.cfg
+
+# Local engines, exports and reproducible unpacked source packages.
+.tools/
+builds/*
+!builds/.gdignore
+!builds/.gitkeep
+source_assets/unpacked/
+
+# Development tools and operating system noise.
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/weapons/weapon_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "contra_l"
+display_name = "L 激光"
+kind = "laser"
+damage = 3
+cooldown = 0.45
+speed = 1200.0
+energy_cost = 0
+pierce_count = 3
+max_active = 0
+target_damage_cap = 0

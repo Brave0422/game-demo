@@ -1,0 +1,16 @@
+[
+  {
+    "check": "godot_import",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "godot_startup",
+    "exit_code": 0,
+    "errors_or_warnings": []
+  },
+  {
+    "check": "no_gameplay_scripts",
+    "files": []
+  }
+]

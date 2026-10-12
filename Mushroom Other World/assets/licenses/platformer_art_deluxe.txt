@@ -1,0 +1,17 @@
+
+###############################################################################
+
+	Platformer Art Complete Pack by Kenney Vleugels (www.kenney.nl)
+
+	------------------------------
+		
+		License (CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	You may use these graphics in personal and commercial projects.
+	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+###############################################################################
+Source: https://kenney.nl/assets/platformer-art-deluxe
+Acquired: 2026-10-11
+Source page snapshot: source_assets/source_pages/platformer_art_deluxe.html

@@ -1,0 +1,8 @@
+License declared by the author on the source page: CC0 1.0 Universal.
+Full legal text: cc0_1_0.txt
+
+Source: https://www.gameart2d.com/free-platformer-game-tileset.html
+Acquired: 2026-10-11
+Source page snapshot: source_assets/source_pages/nature.html
+Freebies license: https://www.gameart2d.com/license.html
+Snapshot: source_assets/source_pages/nature_license.html

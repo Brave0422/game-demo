@@ -1,0 +1,121 @@
+[
+  {
+    "id": "platformer-art-deluxe",
+    "url": "https://kenney.nl/media/pages/assets/platformer-art-deluxe/cb30f83169-1677696393/kenney_platformer-art-deluxe.zip",
+    "path": "source_assets/downloads/platformer_art_deluxe.zip",
+    "bytes": 6582450,
+    "sha256": "232c5644858287181ff5b20107b1969064a2833dd4ab51a6a4c5997889d2720d"
+  },
+  {
+    "id": "platformer-pack-medieval",
+    "url": "https://kenney.nl/media/pages/assets/platformer-pack-medieval/848792381c-1677696130/kenney_platformer-pack-medieval.zip",
+    "path": "source_assets/downloads/platformer_pack_medieval.zip",
+    "bytes": 1812358,
+    "sha256": "c448717fb7883a97806909edfa6bb16777c93101fe02d5da10f0f3fc60aaa12e"
+  },
+  {
+    "id": "ui-pack-adventure",
+    "url": "https://kenney.nl/media/pages/assets/ui-pack-adventure/9a877376bc-1723597274/kenney_ui-pack-adventure.zip",
+    "path": "source_assets/downloads/ui_pack_adventure.zip",
+    "bytes": 577463,
+    "sha256": "982e8ab66842509ee9214f9c2038e594cbe029f19d1dc177fecaad3b41a67ed3"
+  },
+  {
+    "id": "digital-audio",
+    "url": "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip",
+    "path": "source_assets/downloads/digital_audio.zip",
+    "bytes": 990367,
+    "sha256": "24e6ce28b76a6d8c89cff4d331e0965ff5c3de8a73c612028e9d363cc64e4f06"
+  },
+  {
+    "id": "impact-sounds",
+    "url": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+    "path": "source_assets/downloads/impact_sounds.zip",
+    "bytes": 800850,
+    "sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8"
+  },
+  {
+    "id": "ui-audio",
+    "url": "https://kenney.nl/media/pages/assets/ui-audio/490d233f68-1677590494/kenney_ui-audio.zip",
+    "path": "source_assets/downloads/ui_audio.zip",
+    "bytes": 411949,
+    "sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6"
+  },
+  {
+    "id": "music-jingles",
+    "url": "https://kenney.nl/media/pages/assets/music-jingles/f37e530b9e-1677590399/kenney_music-jingles.zip",
+    "path": "source_assets/downloads/music_jingles.zip",
+    "bytes": 1239525,
+    "sha256": "b729ba57959bd58793d2c5cafa348aaf2655d354f3da35ec4729e03ec77197b8"
+  },
+  {
+    "id": "nature",
+    "url": "https://www.gameart2d.com/uploads/3/0/9/1/30917885/freetileset.zip",
+    "path": "source_assets/downloads/nature.zip",
+    "bytes": 16355132,
+    "sha256": "a4dabc46ca5c16adb8c6fb550c6cd53affc83fb489f6a151feec34f9ff03a448"
+  },
+  {
+    "id": "grassland",
+    "url": "https://opengameart.org/sites/default/files/49_0.ogg",
+    "path": "source_assets/downloads/grassland.ogg",
+    "bytes": 2515216,
+    "sha256": "745348a59e54b68137c16f3217a37438b5505338460837ff9ffcd60a425829e4"
+  },
+  {
+    "id": "dungeon",
+    "url": "https://opengameart.org/sites/default/files/mystery.ogg",
+    "path": "source_assets/downloads/dungeon.ogg",
+    "bytes": 1975582,
+    "sha256": "e86a364f3c97c8e4f9574d788270b0e7e3e334277cd7f2d27a2b28e7f1f291f7"
+  },
+  {
+    "id": "boss",
+    "url": "https://opengameart.org/sites/default/files/boss_battle_%232_metal_pack.zip",
+    "path": "source_assets/downloads/boss.zip",
+    "bytes": 11010042,
+    "sha256": "27845e601593ec3348488b0479111cda656a97127ef69a066256f7c967e125ab"
+  },
+  {
+    "id": "bat",
+    "url": "https://opengameart.org/sites/default/files/enemy_game_character_flappy_bat_monster.zip",
+    "path": "source_assets/downloads/bat.zip",
+    "bytes": 51147,
+    "sha256": "0d9f24d8351fea4ced613e65dab2fa0c3b938e12961de5963dcf1d2b5e002338"
+  },
+  {
+    "id": "mushroom",
+    "url": "https://opengameart.org/sites/default/files/mushroom_monster.zip",
+    "path": "source_assets/downloads/mushroom.zip",
+    "bytes": 790900,
+    "sha256": "c21d6b57602032a709738990ae1a602fa41bde521b50a3276639a28af8feb41d"
+  },
+  {
+    "id": "noto_sans_sc_regular",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+    "path": "source_assets/downloads/noto_sans_sc_regular.otf",
+    "bytes": 16437364,
+    "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  {
+    "id": "noto_sans_sc_bold",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Bold.otf",
+    "path": "source_assets/downloads/noto_sans_sc_bold.otf",
+    "bytes": 17002248,
+    "sha256": "b5f0d1a190a7f9b43c310a8850630af12553df32c4c050543f9059732d9b4c0a"
+  },
+  {
+    "id": "noto_license",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/LICENSE",
+    "path": "source_assets/downloads/noto_sans_cjk_license.txt",
+    "bytes": 4301,
+    "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+  },
+  {
+    "id": "cc0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+    "path": "source_assets/downloads/cc0_1_0.txt",
+    "bytes": 7048,
+    "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+  }
+]

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/weapons/weapon_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "mega_cutter"
+display_name = "回旋切刃"
+kind = "cutter"
+damage = 2
+cooldown = 0.55
+speed = 500.0
+energy_cost = 2
+pierce_count = 1
+max_active = 1
+target_damage_cap = 0

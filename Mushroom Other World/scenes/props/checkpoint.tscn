@@ -1,0 +1,15 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://scenes/props/checkpoint.gd" id="1"]
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(90, 150)
+
+[node name="Checkpoint" type="Area2D"]
+editor_description = "独立功能场景；行为与依赖见同目录脚本的中文注释。"
+script = ExtResource("1")
+collision_layer = 128
+collision_mask = 2
+z_index = 2
+[node name="Shape" type="CollisionShape2D" parent="."]
+editor_description = "安全站立区域检查点触发器。"
+position = Vector2(0, -65)
+shape = SubResource("body")

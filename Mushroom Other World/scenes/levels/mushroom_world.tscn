@@ -1,0 +1,918 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/levels/mushroom_world.gd" id="level_script"]
+
+[ext_resource type="Script" path="res://scenes/levels/world_backdrop.gd" id="backdrop"]
+
+[ext_resource type="Resource" path="res://resources/levels/mushroom_world.tres" id="data"]
+
+[ext_resource type="PackedScene" path="res://scenes/levels/terrain.tscn" id="terrain"]
+
+[ext_resource type="PackedScene" path="res://scenes/players/player.tscn" id="player"]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="enemy"]
+
+[ext_resource type="PackedScene" path="res://scenes/bosses/spore_king.tscn" id="boss"]
+
+[ext_resource type="PackedScene" path="res://scenes/props/breakable.tscn" id="breakable"]
+
+[ext_resource type="PackedScene" path="res://scenes/props/pickup.tscn" id="pickup"]
+
+[ext_resource type="PackedScene" path="res://scenes/props/checkpoint.tscn" id="checkpoint"]
+
+[ext_resource type="PackedScene" path="res://scenes/props/gate.tscn" id="gate"]
+
+[ext_resource type="PackedScene" path="res://scenes/props/attack_switch.tscn" id="switch"]
+
+[ext_resource type="PackedScene" path="res://scenes/props/moving_platform.tscn" id="platform"]
+
+[ext_resource type="PackedScene" path="res://scenes/levels/encounter_controller.tscn" id="encounter"]
+
+[ext_resource type="Resource" path="res://resources/enemies/patrol.tres" id="patrol"]
+
+[ext_resource type="Resource" path="res://resources/enemies/spitter.tres" id="spitter"]
+
+[ext_resource type="Resource" path="res://resources/enemies/bat.tres" id="bat"]
+
+[ext_resource type="Resource" path="res://resources/enemies/roller.tres" id="roller"]
+
+[ext_resource type="Resource" path="res://resources/enemies/beetle.tres" id="beetle"]
+
+[ext_resource type="Resource" path="res://resources/encounters/e2.tres" id="e2"]
+
+[node name="MushroomWorld" type="Node2D"]
+
+editor_description = "固定设计首关，34 个屏幕单元。静态布局可在 Godot 编辑器直接修改。"
+
+script = ExtResource("level_script")
+
+data = ExtResource("data")
+
+[node name="Backdrop" type="Node2D" parent="."]
+
+editor_description = "三层视差环境，不承担碰撞。"
+
+z_index = -10
+
+script = ExtResource("backdrop")
+
+[node name="Terrain" parent="." instance=ExtResource("terrain")]
+
+editor_description = "烘焙的草地/地下 TileMapLayer，可直接编辑单元。"
+
+[node name="Actors" type="Node2D" parent="."]
+
+editor_description = "角色、普通敌人、Boss；弹体运行时也由本层持有。"
+
+[node name="Player" parent="Actors" instance=ExtResource("player")]
+
+editor_description = "Player：player 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(180, 576)
+
+
+
+[node name="SporeKing" parent="Actors" instance=ExtResource("boss")]
+
+editor_description = "SporeKing：boss 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(43150, 576)
+
+
+
+[node name="EnemyS1N1" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS1N1：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(2700, 576)
+
+data = ExtResource("patrol")
+stable_id = "s1/enemy1"
+patrol_radius = 140.0
+
+[node name="EnemyS1N2" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS1N2：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(3270, 576)
+
+data = ExtResource("patrol")
+stable_id = "s1/enemy2"
+patrol_radius = 140.0
+
+[node name="EnemyS2N1" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N1：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(4350, 448)
+
+data = ExtResource("patrol")
+stable_id = "s2/enemy1"
+patrol_radius = 140.0
+
+[node name="EnemyS2N2" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N2：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(4750, 576)
+
+data = ExtResource("spitter")
+stable_id = "s2/enemy2"
+patrol_radius = 140.0
+
+[node name="EnemyS2N3" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N3：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(5504, 576)
+
+data = ExtResource("spitter")
+stable_id = "s2/enemy3"
+patrol_radius = 140.0
+
+[node name="EnemyS2N4" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N4：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(5760, 576)
+
+data = ExtResource("patrol")
+stable_id = "s2/enemy4"
+patrol_radius = 140.0
+
+[node name="EnemyS2N5" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N5：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(6330, 448)
+
+data = ExtResource("spitter")
+stable_id = "s2/enemy5"
+patrol_radius = 140.0
+
+[node name="EnemyS2N6" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N6：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(6900, 576)
+
+data = ExtResource("patrol")
+stable_id = "s2/enemy6"
+patrol_radius = 140.0
+
+[node name="EnemyS2N7" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N7：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(7540, 576)
+
+data = ExtResource("spitter")
+stable_id = "s2/enemy7"
+patrol_radius = 140.0
+
+[node name="EnemyS2N8" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N8：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(8230, 576)
+
+data = ExtResource("spitter")
+stable_id = "s2/enemy8"
+patrol_radius = 140.0
+
+[node name="EnemyS2N9" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N9：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(8910, 576)
+
+data = ExtResource("patrol")
+stable_id = "s2/enemy9"
+patrol_radius = 140.0
+
+[node name="EnemyS2N10" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS2N10：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(9600, 576)
+
+data = ExtResource("spitter")
+stable_id = "s2/enemy10"
+patrol_radius = 140.0
+
+[node name="EnemyS3N1" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N1：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(10700, 576)
+
+data = ExtResource("roller")
+stable_id = "s3/enemy1"
+patrol_radius = 140.0
+
+[node name="EnemyS3N2" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N2：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(11250, 576)
+
+data = ExtResource("patrol")
+stable_id = "s3/enemy2"
+patrol_radius = 140.0
+
+[node name="EnemyS3N3" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N3：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(12032, 576)
+
+data = ExtResource("roller")
+stable_id = "s3/enemy3"
+patrol_radius = 140.0
+
+[node name="EnemyS3N4" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N4：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(12400, 576)
+
+data = ExtResource("spitter")
+stable_id = "s3/enemy4"
+patrol_radius = 140.0
+
+[node name="EnemyS3N5" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N5：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(13000, 512)
+
+data = ExtResource("roller")
+stable_id = "s3/enemy5"
+patrol_radius = 140.0
+
+[node name="EnemyS3N6" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N6：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(13620, 576)
+
+data = ExtResource("roller")
+stable_id = "s3/enemy6"
+patrol_radius = 140.0
+
+[node name="EnemyS3N7" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N7：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(14200, 576)
+
+data = ExtResource("patrol")
+stable_id = "s3/enemy7"
+patrol_radius = 140.0
+
+[node name="EnemyS3N8" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N8：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(14950, 576)
+
+data = ExtResource("roller")
+stable_id = "s3/enemy8"
+patrol_radius = 140.0
+
+[node name="EnemyS3N9" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N9：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(15350, 448)
+
+data = ExtResource("spitter")
+stable_id = "s3/enemy9"
+patrol_radius = 140.0
+
+[node name="EnemyS3N10" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS3N10：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(15800, 576)
+
+data = ExtResource("roller")
+stable_id = "s3/enemy10"
+patrol_radius = 140.0
+
+[node name="EnemyS4N1" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS4N1：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(17200, 512)
+
+data = ExtResource("beetle")
+stable_id = "s4/enemy1"
+patrol_radius = 140.0
+
+[node name="EnemyS4N2" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS4N2：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(17900, 576)
+
+data = ExtResource("beetle")
+stable_id = "s4/enemy2"
+patrol_radius = 140.0
+
+[node name="EnemyS4N3" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS4N3：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(18500, 512)
+
+data = ExtResource("beetle")
+stable_id = "s4/enemy3"
+patrol_radius = 140.0
+
+[node name="EnemyS4N4" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS4N4：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(19100, 576)
+
+data = ExtResource("beetle")
+stable_id = "s4/enemy4"
+patrol_radius = 140.0
+
+[node name="EnemyS5N1" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N1：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(22850, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy1"
+patrol_radius = 140.0
+
+[node name="EnemyS5N2" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N2：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(23400, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy2"
+patrol_radius = 140.0
+
+[node name="EnemyS5N3" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N3：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(24000, 576)
+
+data = ExtResource("patrol")
+stable_id = "s5/enemy3"
+patrol_radius = 140.0
+
+[node name="EnemyS5N4" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N4：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(24600, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy4"
+patrol_radius = 140.0
+
+[node name="EnemyS5N5" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N5：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(25200, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy5"
+patrol_radius = 140.0
+
+[node name="EnemyS5N6" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N6：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(25800, 448)
+
+data = ExtResource("spitter")
+stable_id = "s5/enemy6"
+patrol_radius = 140.0
+
+[node name="EnemyS5N7" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N7：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(26400, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy7"
+patrol_radius = 140.0
+
+[node name="EnemyS5N8" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N8：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(27300, 576)
+
+data = ExtResource("patrol")
+stable_id = "s5/enemy8"
+patrol_radius = 140.0
+
+[node name="EnemyS5N9" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N9：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(27850, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy9"
+patrol_radius = 140.0
+
+[node name="EnemyS5N10" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS5N10：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(28544, 380)
+
+data = ExtResource("bat")
+stable_id = "s5/enemy10"
+patrol_radius = 140.0
+
+[node name="EnemyS6N1" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS6N1：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(30200, 448)
+
+data = ExtResource("patrol")
+stable_id = "s6/enemy1"
+patrol_radius = 140.0
+
+[node name="EnemyS6N2" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS6N2：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(31200, 380)
+
+data = ExtResource("bat")
+stable_id = "s6/enemy2"
+patrol_radius = 140.0
+
+[node name="EnemyS6N3" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS6N3：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(32200, 576)
+
+data = ExtResource("roller")
+stable_id = "s6/enemy3"
+patrol_radius = 140.0
+
+[node name="EnemyS6N4" parent="Actors" instance=ExtResource("enemy")]
+
+editor_description = "EnemyS6N4：enemy 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(33792, 576)
+
+data = ExtResource("beetle")
+stable_id = "s6/enemy4"
+patrol_radius = 140.0
+
+[node name="Breakables" type="Node2D" parent="."]
+
+editor_description = "顶砖、武器箱和裂纹障碍；实体与掉落稳定 ID 分离。"
+
+[node name="Object00" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object00：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(580, 420)
+
+stable_id = "props/object00"
+kind = "brick"
+drop = "small"
+
+[node name="Object01" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object01：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(770, 544)
+
+stable_id = "props/object01"
+kind = "crate"
+drop = "A"
+
+[node name="Object02" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object02：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(1060, 420)
+
+stable_id = "props/object02"
+kind = "cracked"
+drop = "small"
+
+[node name="Object03" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object03：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(6840, 288)
+
+stable_id = "props/object03"
+kind = "crate"
+drop = "D"
+
+[node name="Object04" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object04：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(22080, 544)
+
+stable_id = "props/object04"
+kind = "crate"
+drop = "B"
+
+[node name="Object05" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object05：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(29650, 544)
+
+stable_id = "props/object05"
+kind = "crate"
+drop = "C"
+
+[node name="Object06" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object06：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(39700, 544)
+
+stable_id = "props/object06"
+kind = "crate"
+drop = "A"
+
+[node name="Object07" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object07：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(40200, 544)
+
+stable_id = "props/object07"
+kind = "crate"
+drop = "B"
+
+[node name="Object08" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object08：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(40700, 544)
+
+stable_id = "props/object08"
+kind = "crate"
+drop = "C"
+
+[node name="Object09" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object09：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(5600, 420)
+
+stable_id = "props/object09"
+kind = "brick"
+drop = "small"
+
+[node name="Object10" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object10：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(13120, 420)
+
+stable_id = "props/object10"
+kind = "brick"
+drop = "small"
+
+[node name="Object11" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object11：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(24400, 420)
+
+stable_id = "props/object11"
+kind = "cracked"
+drop = "small"
+
+[node name="Object12" parent="Breakables" instance=ExtResource("breakable")]
+
+editor_description = "Object12：breakable 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(31800, 420)
+
+stable_id = "props/object12"
+kind = "brick"
+drop = "small"
+
+[node name="Pickups" type="Node2D" parent="."]
+
+editor_description = "预置补给；恢复快照时统一替换成快照记录。"
+
+[node name="Supply00" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply00：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(8620, 540)
+
+stable_id = "supply/0"
+kind = "small"
+
+[node name="Supply01" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply01：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(14800, 540)
+
+stable_id = "supply/1"
+kind = "small"
+
+[node name="Supply02" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply02：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(27800, 540)
+
+stable_id = "supply/2"
+kind = "small"
+
+[node name="Supply03" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply03：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(21200, 540)
+
+stable_id = "supply/3"
+kind = "large"
+
+[node name="Supply04" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply04：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(32800, 540)
+
+stable_id = "supply/4"
+kind = "large"
+
+[node name="Supply05" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply05：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(38900, 540)
+
+stable_id = "supply/5"
+kind = "large"
+
+[node name="Supply06" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply06：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(41600, 540)
+
+stable_id = "supply/6"
+kind = "large"
+
+[node name="Supply07" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply07：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(26200, 540)
+
+stable_id = "supply/7"
+kind = "energy"
+
+[node name="Supply08" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply08：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(33400, 540)
+
+stable_id = "supply/8"
+kind = "energy"
+
+[node name="Supply09" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply09：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(39300, 540)
+
+stable_id = "supply/9"
+kind = "energy"
+
+[node name="Supply10" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply10：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(41200, 540)
+
+stable_id = "supply/10"
+kind = "energy"
+
+[node name="Supply11" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply11：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(7160, 280)
+
+stable_id = "supply/11"
+kind = "small"
+
+[node name="Supply12" parent="Pickups" instance=ExtResource("pickup")]
+
+editor_description = "Supply12：pickup 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(26900, 280)
+
+stable_id = "supply/12"
+kind = "energy"
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+editor_description = "CP0 自动建立；CP1～CP5 单向提交，Boss 门前 CP5。"
+
+[node name="CP0" parent="Checkpoints" instance=ExtResource("checkpoint")]
+
+editor_description = "CP0：checkpoint 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(180, 576)
+
+index = 0
+
+[node name="CP1" parent="Checkpoints" instance=ExtResource("checkpoint")]
+
+editor_description = "CP1：checkpoint 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(3720, 576)
+
+index = 1
+
+[node name="CP2" parent="Checkpoints" instance=ExtResource("checkpoint")]
+
+editor_description = "CP2：checkpoint 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(16400, 576)
+
+index = 2
+
+[node name="CP3" parent="Checkpoints" instance=ExtResource("checkpoint")]
+
+editor_description = "CP3：checkpoint 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(21600, 576)
+
+index = 3
+
+[node name="CP4" parent="Checkpoints" instance=ExtResource("checkpoint")]
+
+editor_description = "CP4：checkpoint 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(29200, 576)
+
+index = 4
+
+[node name="CP5" parent="Checkpoints" instance=ExtResource("checkpoint")]
+
+editor_description = "CP5：checkpoint 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(42000, 576)
+
+index = 5
+
+[node name="Gates" type="Node2D" parent="."]
+
+editor_description = "两处机关门和 Boss 入口门；开关关联稳定 ID。"
+
+[node name="GateOne" parent="Gates" instance=ExtResource("gate")]
+
+editor_description = "GateOne：gate 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(24960, 576)
+
+stable_id = "gate/one"
+height = 576.0
+
+[node name="GateTwo" parent="Gates" instance=ExtResource("gate")]
+
+editor_description = "GateTwo：gate 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(34240, 576)
+
+stable_id = "gate/two"
+height = 576.0
+
+[node name="BossEntrance" parent="Gates" instance=ExtResource("gate")]
+
+editor_description = "BossEntrance：gate 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(42260, 576)
+
+stable_id = "gate/boss"
+opened = true
+height = 576.0
+
+[node name="Switches" type="Node2D" parent="."]
+
+editor_description = "普通弹和冰刃均可触发，连线表示所连接的门。"
+
+[node name="SwitchOne" parent="Switches" instance=ExtResource("switch")]
+
+editor_description = "SwitchOne：switch 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(24640, 480)
+
+stable_id = "switch/one"
+gate_id = "gate/one"
+gate_offset = Vector2(320, 0)
+
+[node name="SwitchTwo" parent="Switches" instance=ExtResource("switch")]
+
+editor_description = "SwitchTwo：switch 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(33920, 480)
+
+stable_id = "switch/two"
+gate_id = "gate/two"
+gate_offset = Vector2(320, 0)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+editor_description = "四组实体平台：两水平、两竖直，站立宽度 176。"
+
+[node name="Platform1" parent="Platforms" instance=ExtResource("platform")]
+
+editor_description = "Platform1：platform 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(11400, 450)
+
+travel = Vector2(224, 0)
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("platform")]
+
+editor_description = "Platform2：platform 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(14400, 440)
+
+travel = Vector2(192, 0)
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("platform")]
+
+editor_description = "Platform3：platform 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(30600, 448)
+
+travel = Vector2(0, -192)
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("platform")]
+
+editor_description = "Platform4：platform 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(33100, 448)
+
+travel = Vector2(0, -224)
+
+[node name="Encounters" type="Node2D" parent="."]
+
+editor_description = "两处无坑封闭战斗场，每场两批三只。"
+
+[node name="EncounterOne" parent="Encounters" instance=ExtResource("encounter")]
+
+editor_description = "EncounterOne：encounter 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(19520, 576)
+
+
+
+[node name="EncounterTwo" parent="Encounters" instance=ExtResource("encounter")]
+
+editor_description = "EncounterTwo：encounter 实例，稳定 ID 和参数见下方属性。"
+
+position = Vector2(35328, 576)
+
+data = ExtResource("e2")
+
+[node name="CameraRig" type="Camera2D" parent="."]
+
+editor_description = "前视 160 的独立镜头，Boss 房内锁屏。"
+
+position = Vector2(640, 360)
+
+position_smoothing_enabled = true
+
+position_smoothing_speed = 7.0
+
+limit_left = 0
+
+limit_top = 0
+
+limit_right = 43520
+
+limit_bottom = 720

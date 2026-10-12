@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://tests/gameplay_tests.gd" id="1"]
+[node name="GameplayTests" type="Node"]
+editor_description = "引擎回归测试入口；不包含在发行包。"
+script = ExtResource("1")

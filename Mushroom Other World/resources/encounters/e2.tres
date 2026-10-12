@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/encounters/encounter_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "e2"
+first_wave = PackedStringArray("bat", "bat", "spitter")
+second_wave = PackedStringArray("roller", "beetle", "spitter")

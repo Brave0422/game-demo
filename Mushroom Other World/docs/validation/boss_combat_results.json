@@ -1,0 +1,18 @@
+[
+	{
+		"boss_hp": 0,
+		"character": "bill",
+		"mode": "基础武器自动输入；无血量/伤害修改，不代表首次玩家时长",
+		"player_hp": 8,
+		"seconds": 66.2,
+		"won": true
+	},
+	{
+		"boss_hp": 0,
+		"character": "mega_man",
+		"mode": "基础武器自动输入；无血量/伤害修改，不代表首次玩家时长",
+		"player_hp": 8,
+		"seconds": 83.45,
+		"won": true
+	}
+]

@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "check": "export_startup",
+      "exit_code": 0,
+      "errors_or_warnings": []
+    },
+    {
+      "check": "export_smoke",
+      "exit_code": 0,
+      "errors_or_warnings": []
+    }
+  ],
+  "characters_started_from_pck": [
+    "bill",
+    "mega_man"
+  ],
+  "scope": "Exported EXE startup; editor engine separately loads exported PCK for two characters, 40 enemies, pause/resume/menu. Same Windows machine; not clean-machine full playthrough",
+  "files": {
+    "builds/windows/mushroom_other_world.exe": {
+      "bytes": 109268480,
+      "sha256": "d34d36f3be1a6c49c56525ae86469b92e4f417ddf0b43cf00dd80c385c4b0562"
+    },
+    "builds/windows/mushroom_other_world.pck": {
+      "bytes": 41940232,
+      "sha256": "3f49159cdaafbbb028c3866b90699707f149b078a5a0bc739780a7679b17829e"
+    },
+    "builds/mushroom_other_world_windows_v0.3.zip": {
+      "bytes": 76823553,
+      "sha256": "baedf5896d3712b921e859c52c583d064117fa4670df1c9216dce82834073438"
+    }
+  }
+}

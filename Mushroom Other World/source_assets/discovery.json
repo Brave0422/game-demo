@@ -1,0 +1,172 @@
+[
+  {
+    "id": "platformer-art-deluxe",
+    "page": "https://kenney.nl/assets/platformer-art-deluxe",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/platformer-art-deluxe/cb30f83169-1677696393/kenney_platformer-art-deluxe.zip"
+    ]
+  },
+  {
+    "id": "platformer-pack-medieval",
+    "page": "https://kenney.nl/assets/platformer-pack-medieval",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/platformer-pack-medieval/848792381c-1677696130/kenney_platformer-pack-medieval.zip"
+    ]
+  },
+  {
+    "id": "ui-pack-adventure",
+    "page": "https://kenney.nl/assets/ui-pack-adventure",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/ui-pack-adventure/9a877376bc-1723597274/kenney_ui-pack-adventure.zip"
+    ]
+  },
+  {
+    "id": "digital-audio",
+    "page": "https://kenney.nl/assets/digital-audio",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/digital-audio/298a4a82d6-1677590260/preview-3.ogg",
+      "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+    ]
+  },
+  {
+    "id": "impact-sounds",
+    "page": "https://kenney.nl/assets/impact-sounds",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/impact-sounds/4ef56f2408-1677589755/foley-preview.ogg",
+      "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip"
+    ]
+  },
+  {
+    "id": "ui-audio",
+    "page": "https://kenney.nl/assets/ui-audio",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/ui-audio/683e0b08db-1677590485/preview-6.ogg",
+      "https://kenney.nl/media/pages/assets/ui-audio/490d233f68-1677590494/kenney_ui-audio.zip"
+    ]
+  },
+  {
+    "id": "music-jingles",
+    "page": "https://kenney.nl/assets/music-jingles",
+    "links": [
+      "https://creativecommons.org/publicdomain/zero/1.0/",
+      "#inline-download",
+      "https://kenney.nl/media/pages/assets/music-jingles/5d3327d2da-1677590394/preview-5.ogg",
+      "https://kenney.nl/media/pages/assets/music-jingles/f37e530b9e-1677590399/kenney_music-jingles.zip"
+    ]
+  },
+  {
+    "id": "nature",
+    "page": "https://www.gameart2d.com/free-platformer-game-tileset.html",
+    "links": [
+      "/license.html",
+      "/license.html",
+      "/uploads/3/0/9/1/30917885/freetileset.zip",
+      "/license.html"
+    ]
+  },
+  {
+    "id": "nature-license",
+    "page": "https://www.gameart2d.com/license.html",
+    "links": [
+      "/license.html",
+      "/license.html",
+      "/license.html"
+    ]
+  },
+  {
+    "id": "grassland",
+    "page": "https://opengameart.org/content/a-new-day",
+    "links": [
+      "http://creativecommons.org/publicdomain/zero/1.0/",
+      "https://opengameart.org/sites/default/files/license_images/cc0.png",
+      "https://opengameart.org/sites/default/files/styles/medium/public/audio_preview/49_0.ogg.png",
+      "https://opengameart.org/sites/default/files/49_0.ogg"
+    ]
+  },
+  {
+    "id": "dungeon",
+    "page": "https://opengameart.org/content/mysterious-orchestral-theme",
+    "links": [
+      "http://creativecommons.org/publicdomain/zero/1.0/",
+      "https://opengameart.org/sites/default/files/license_images/cc0.png",
+      "https://opengameart.org/sites/default/files/styles/medium/public/audio_preview/mystery.ogg.png",
+      "https://opengameart.org/sites/default/files/mystery.ogg"
+    ]
+  },
+  {
+    "id": "boss",
+    "page": "https://opengameart.org/content/boss-battle-2-symphonic-metal%20",
+    "links": [
+      "http://creativecommons.org/publicdomain/zero/1.0/",
+      "https://opengameart.org/sites/default/files/license_images/cc0.png",
+      "https://opengameart.org/sites/default/files/boss_battle_%232_metal_pack.zip"
+    ]
+  },
+  {
+    "id": "bat",
+    "page": "https://opengameart.org/content/villain-game-character-flappy-bat-monster-flying",
+    "links": [
+      "http://creativecommons.org/publicdomain/zero/1.0/",
+      "https://opengameart.org/sites/default/files/license_images/cc0.png",
+      "https://opengameart.org/sites/default/files/enemy_game_character_flappy_bat_monster.zip"
+    ]
+  },
+  {
+    "id": "mushroom",
+    "page": "https://opengameart.org/content/little-monster-mushroom",
+    "links": [
+      "http://creativecommons.org/publicdomain/zero/1.0/",
+      "https://opengameart.org/sites/default/files/license_images/cc0.png",
+      "https://opengameart.org/sites/default/files/mushroom_monster.zip"
+    ]
+  },
+  {
+    "id": "godot",
+    "page": "https://godotengine.org/download/windows/",
+    "links": [
+      "https://plausible.godot.foundation/js/script.file-downloads.outbound-links.js",
+      "/download/windows/",
+      "/assets/css/download.css?3",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=win64.exe.zip&platform=windows.64",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=mono_win64.zip&platform=windows.64",
+      "/download/3.x/",
+      "/download/archive",
+      "/download/archive",
+      "https://dotnet.microsoft.com/download",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=win64.exe.zip&platform=windows.64",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=win32.exe.zip&platform=windows.32",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=windows_arm64.exe.zip&platform=windows.arm64",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=mono_win64.zip&platform=windows.64",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=mono_win32.zip&platform=windows.32",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=mono_windows_arm64.zip&platform=windows.arm64",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=export_templates.tpz&platform=templates",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=mono_export_templates.tpz&platform=templates",
+      "/assets/download/itch_logo.svg",
+      "/assets/download/steam_logo.svg",
+      "/assets/download/epic_logo.svg",
+      "/download/android",
+      "/download/linux",
+      "/download/macos",
+      "/download/windows/",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=template_release.aar&platform=aar_library",
+      "https://downloads.godotengine.org/?version=4.7.2&flavor=stable&slug=mono.template_release.aar&platform=aar_library",
+      "/download/preview",
+      "/assets/download/dl_icon_github.png",
+      "/download",
+      "/download/archive/",
+      "/license/"
+    ]
+  }
+]
